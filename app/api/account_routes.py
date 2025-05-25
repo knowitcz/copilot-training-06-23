@@ -11,7 +11,6 @@ def get_account_service(session: Session = Depends(get_session)) -> AccountServi
     repo = AccountRepository(session)
     return AccountService(repo)
 
-
 @router.get("/account/{id}", response_model=Account)
 def get_account(id: int,
                 account_service: AccountService = Depends(get_account_service)):
