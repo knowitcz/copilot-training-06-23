@@ -9,7 +9,9 @@ SQLModel.metadata.create_all(bind=engine)
 app = FastAPI()
 
 # Serve static files from /static
-app.mount("/", StaticFiles(directory="app/static", html=True), name="static")
+@app.get("/")
+def serve_static_files():
+    return StaticFiles(directory="app/static", html=True)
 
 app.include_router(account_router, prefix="/api/v1", tags=["account"])
 
